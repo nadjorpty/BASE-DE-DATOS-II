@@ -1,0 +1,72 @@
+CREATE DATABASE CARTERA_ELECTRONICA;
+
+CREATE TABLE transaction (
+    request_id INT NOT NULL,
+    from_id INT NOT NULL,
+    to_id INT NOT NULL,
+    amount DECIMAL(10,2) NOT NULL,
+    reason VARCHAR(255) NOT NULL,
+    status VARCHAR(50) NOT NULL,
+    timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    category VARCHAR(50) NOT NULL
+);
+
+INSERT INTO transaction (request_id,from_id, to_id, amount, reason, status, category) VALUES
+(15,1, 2, 100.00, 'Pago de factura', 'completed', 'send'),
+(14,2, 1, 50.00, 'Reembolso por artículo devuelto', 'completed', 'request'),
+(13,3, 1, 75.50, 'Pago de servicios', 'pending', 'request'),
+(13,2, 3, 200.00, 'Transferencia de fondos', 'completed', 'send'),
+(11,1, 3, 150.00, 'Pago de deuda', 'pending', 'send'),
+(12,3, 2, 80.00, 'Reembolso de préstamo', 'completed', 'request');
+
+
+CREATE TABLE user (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50)  NOT NULL,
+    password VARCHAR(255)  NOT NULL,
+    salt INT NOT NULL,
+    balance DECIMAL(10,2) NOT NULL
+);
+
+INSERT INTO user (user_id,name, password, salt, balance) VALUES
+(11,'Usuario1', 'password1', 12345, 1000.00),
+(12,'Usuario2', 'password2', 54321, 500.50),
+(13,'Usuario3', 'password3', 98765, 300.25),
+(14,'Usuario4', 'password4', 67890, 1500.75),
+(15,'Usuario5', 'password5', 13579, 800.00);
+
+CREATE TABLE contact (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    friend_id INT NOT NULL
+);
+
+
+INSERT INTO contact (user_id,friend_id) VALUES
+(31,11),
+(32,12),
+(33,13),
+(34,14),
+(35,15);
+
+CREATE TABLE user_details  (
+    account_no INT AUTO_INCREMENT PRIMARY KEY,
+    type VARCHAR(255)  NOT NULL,
+    phone VARCHAR(255)  NOT NULL,
+    aadhar_doc VARCHAR(255)  NOT NULL,
+    image VARCHAR(255)  NOT NULL,
+    user_id INT  NOT NULL
+
+);
+
+
+INSERT INTO user_details (type, phone, aadhar_doc, image, user_id) VALUES
+('Tipo1', '123456789', 'ainformation_schemaadhar_doc_1.jpg', 'image_1.jpg', 11),
+('Tipo2', '987654321', 'aadhar_doc_2.jpg', 'image_2.jpg', 12),
+('Tipo3', '111111111', 'aadhar_doc_3.jpg', 'image_3.jpg', 13),
+('Tipo4', '222222222', 'aadhar_doc_4.jpg', 'image_4.jpg', 14),
+('Tipo5', '333333333', 'aadhar_doc_5.jpg', 'image_5.jpg', 15);
+
+
+
+
+-- 

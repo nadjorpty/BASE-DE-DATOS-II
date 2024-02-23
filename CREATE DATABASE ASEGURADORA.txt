@@ -1,0 +1,99 @@
+CREATE DATABASE ASEGURADORA;
+
+CREATE TABLE usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario VARCHAR(50) NOT NULL,
+    contraseña VARCHAR(255) NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
+    correo VARCHAR(255) 
+);
+
+
+INSERT INTO usuarios (id, usuario, contraseña, nombre, correo) VALUES
+(34,'JPEREZ', 'contraseña1', 'Juan Pérez', 'juan@example.com'),
+(35,'MRODRIGUEZ', 'contraseña2', 'María Rodríguez', 'maria@example.com'),
+(36,'PLOPEZ', 'contraseña3', 'Pedro López', 'pedro@example.com'),
+(37,'AMARTINEZ', 'contraseña4', 'Ana Martínez', 'ana@example.com'),
+(38,'LGARCIA', 'contraseña5', 'Laura García', 'laura@example.com');
+
+
+CREATE TABLE TIPO_PROCESO (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL
+);
+
+
+INSERT INTO TIPO_PROCESO (id,nombre) VALUES
+(44,'Reclamación de seguro de vida'),
+(45,'Renovación de póliza de automóvil'),
+(46,'Reclamación por accidente de trabajo'),
+(47,'Cotización de seguro de salud'),
+(48,'Modificación de datos en la póliza');
+
+
+CREATE TABLE JUZGADO (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(500) NOT NULL,
+    lugar VARCHAR(500) NOT NULL 
+);
+
+INSERT INTO JUZGADO (id, nombre, lugar) VALUES
+(55,'Tribunal Superior de Justicia de Panamá', 'Ciudad de Panamá'),
+(56,'Tribunal Electoral de Panamá', 'Ciudad de Panamá'),
+(57,'Tribunal de Circuito de David', 'David'),
+(58,'Tribunal de Juicio Oral de Chitré', 'Chitré'),
+(59,'Juzgado Municipal de Santiago', 'Santiago');
+
+
+
+CREATE TABLE ASEGURADORA (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(500) NOT NULL
+);
+
+
+INSERT INTO ASEGURADORA (id,nombre) VALUES
+(64,'Mapfre Panamá'),
+(65,'Assa Compañía de Seguros'),
+(66,'Pan American Life Insurance'),
+(67,'Assicurazioni Generali Panamá'),
+(68,'Banco General Seguros');
+
+
+CREATE TABLE ESTADOS (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(500) NOT NULL
+);
+
+INSERT INTO ESTADOS (id,nombre) VALUES
+(74,'En Curso'),
+(75,'Pendiente'),
+(76,'Cerrados');
+
+
+CREATE TABLE expedientes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    fecha_sistema TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    usuario_id INT,
+    proceso_id INT,
+    id_expediente INT,
+    numero_caso VARCHAR(100),
+    conductor VARCHAR(255),
+    juzgado_id INT,
+    aseguradora_id INT,
+    estado_id INT
+);
+
+
+
+INSERT INTO expedientes (usuario_id, proceso_id, id_expediente, numero_caso, conductor, juzgado_id, aseguradora_id, estado_id) VALUES
+(156,44, 1001, 'CASO001', 'Juan Pérez',55,64,74),
+(157,48, 1002, 'CASO002', 'María Rodríguez',56,64,74),
+(158,48, 1003, 'CASO003', 'Pedro López',58,68,75),
+(159,48, 1004, 'CASO004', 'Ana Martínez',59,68,76),
+(160,45, 1005, 'CASO005', 'Laura García',56,67,75),
+(161,46, 1006, 'CASO006', 'Roberto Gómez',55,68,74),
+(162,47, 1007, 'CASO007', 'Sara Fernández',58,65,75),
+(163,44, 1008, 'CASO008', 'Carlos Sánchez',57,66,76),
+(164,48, 1009, 'CASO009', 'Luisa González',57,64,75),
+(165,44, 1010, 'CASO010', 'Diego Martín',56,68,74);
